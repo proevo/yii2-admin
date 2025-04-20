@@ -5,7 +5,7 @@ namespace mdm\admin\components;
 use Yii;
 use mdm\admin\models\AuthItem;
 use mdm\admin\models\searchs\AuthItem as AuthItemSearch;
-use yii\web\Controller;
+use backend\controllers\Controller;
 use yii\web\NotFoundHttpException;
 use yii\base\NotSupportedException;
 use yii\filters\VerbFilter;
@@ -127,20 +127,6 @@ class ItemController extends Controller
         Yii::$app->getResponse()->format = 'json';
 
         return array_merge($model->getItems(), ['success' => $success]);
-    }
-
-    /**
-     * Assign items
-     * @param string $id
-     * @return array
-     */
-    public function actionGetUsers($id)
-    {
-        $page = Yii::$app->getRequest()->get('page', 0);
-        $model = $this->findModel($id);
-        Yii::$app->getResponse()->format = 'json';
-
-        return array_merge($model->getUsers($page));
     }
 
     /**

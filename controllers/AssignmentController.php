@@ -5,7 +5,7 @@ namespace mdm\admin\controllers;
 use Yii;
 use mdm\admin\models\Assignment;
 use mdm\admin\models\searchs\Assignment as AssignmentSearch;
-use yii\web\Controller;
+use backend\controllers\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -45,6 +45,7 @@ class AssignmentController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'assign' => ['post'],
                     'assign' => ['post'],
                     'revoke' => ['post'],
                 ],

@@ -5,6 +5,7 @@ namespace mdm\admin\models;
 use mdm\admin\components\Configs;
 use mdm\admin\components\Helper;
 use Yii;
+use yii\base\BaseObject;
 
 /**
  * Description of Assignment
@@ -12,7 +13,7 @@ use Yii;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 2.5
  */
-class Assignment extends \mdm\admin\BaseObject
+class Assignment extends BaseObject
 {
     /**
      * @var integer User id
@@ -99,12 +100,12 @@ class Assignment extends \mdm\admin\BaseObject
 
         $assigned = [];
         foreach ($manager->getAssignments($this->id) as $item) {
-            $assigned[$item->roleName] = $available[$item->roleName];
-            unset($available[$item->roleName]);
+            if ($item->roleName[0] != '/') {
+                $assigned[$item->roleName] = $available[$item->roleName];
+                unset($available[$item->roleName]);
+            }
         }
 
-        ksort($available);
-        ksort($assigned);
         return [
             'available' => $available,
             'assigned' => $assigned,
